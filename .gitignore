@@ -1,0 +1,4 @@
+# Project exclude paths
+/mybatis-common/target/
+/mybatis-domain/target/
+/mybatis-practise/target/

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--通过namesapce找到接口-->
+<mapper namespace="com.yp.mybatis.practise.mapper.IStudentMapper">
+
+    <!--表和类的映射关系-->
+    <resultMap id="StudentMapper" type="com.yp.mybatis.domain.entity.Student">
+        <id property="sno" column="sno"/> <!--主键-->
+        <result property="name" column="sname"/>
+        <result property="age" column="sage"/>
+        <result property="dept" column="sdept"/>
+        <result property="sex" column="ssex"/>
+    </resultMap>
+
+    <insert id="save">
+        INSERT INTO Student(sno, sname, sage, ssex, sdept) values (#{sno}, #{name}, #{age}, #{sex}, #{dept})
+    </insert>
+
+    <delete id="delete">
+        delete from Student where sno = #{sno}
+    </delete>
+
+    <update id="update">
+        update Student set sdept = #{dept} where sno = #{sno}
+    </update>
+
+    <select id="findAll" resultMap="StudentMapper">
+        select * from student
+    </select>
+
+    <select id="findAllSdept" resultType="java.lang.String">
+        select sdept from student
+    </select>
+    <select id="findBySdept" resultMap="StudentMapper">
+        select * from student where sdept = #{sdept}
+    </select>
+
+    <select id="findByAgeBetween" resultMap="StudentMapper">
+        select * from student where sage between #{minAge} and #{maxAge}
+    </select>
+
+    <select id="findByAgeOrder" resultMap="StudentMapper">
+        select * from studen order by sage ASC
+    </select>
+
+    <select id="findMaxAge" resultMap="StudentMapper">
+        select * from student order by sage desc limit 0, 1
+    </select>
+
+    <select id="countBySdept" resultType="int">
+        select count(*) from student where sdept = #{sdept}
+    </select>
+
+    <select id="findByLikeName" resultMap="StudentMapper">
+        select * from student where sname like #{name}
+    </select>
+
+</mapper>

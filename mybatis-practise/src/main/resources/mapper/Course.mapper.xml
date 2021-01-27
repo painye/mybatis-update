@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--通过namesapce找到接口-->
+<mapper namespace="com.yp.mybatis.practise.mapper.ICourseMapper">
+
+    <resultMap id="CourseMapper" type="com.yp.mybatis.domain.entity.Course">
+        <id property="no" column="cno"/>
+        <result property="name" column="cname"/>
+        <result property="pno" column="cpno"/>
+        <result property="credit" column="ccredit"/>
+    </resultMap>
+
+    <insert id="save">
+        insert into course (cno, cname, cpno, ccredit)value (#{no}, #{name}, #{pno}, #{credit})
+    </insert>
+
+    <delete id="delete">
+        delete from course where cno = #{cno}
+    </delete>
+
+    <update id="updateName">
+        update course set cname = #{cname} where cno = #{cno}
+    </update>
+
+    <select id="findAllByCPno" resultMap="CourseMapper">
+        select * from course where cpno = #{cpno}
+    </select>
+</mapper>
